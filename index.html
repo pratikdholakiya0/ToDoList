@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+        }
+        .container{
+            width: 60%;
+            height: 100vh;
+            background: #000;
+            & .list-data{
+                width: 100%;
+                height:  auto;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                font-size: 25px;
+                gap: 20px;
+            }
+        }
+        .heading{
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 26px;
+            padding: 100px;
+            gap: 40px;
+
+            
+            & h1{
+                position: relative;
+                /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+            }
+            & h1::before{
+                content: "ToDoList";
+                position: absolute;
+                top: 0;
+                left: 0;
+                color: orange;
+                overflow: hidden;
+                border-right: 2px solid orange;
+                animation: potato 1.5s ease-in infinite alternate;
+            }
+                        
+            & .input-container{
+                box-shadow: 0px 0px 120px 1px orange;
+                display: flex;
+
+                & input{
+                    padding: 10px 40px;
+                    border: 0;
+                    background-color: aliceblue;
+                }
+
+                & .btn{
+                    padding: 10px;
+                    border : 0;
+                    background-color: aliceblue;
+                }
+            }
+        }
+        
+        @keyframes potato {
+            0% {
+                width: 0%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">            
+        <div class="heading">
+            <h1>ToDoList</h1>
+            <div class="input-container">
+                <input type="text" id="input">
+                <button class="btn">Click me</button>
+            </div>
+        </div>
+
+        <div class="list-data">
+
+        </div>
+    </div>
+    <script>
+        let inputData = document.getElementById("input");
+        const btn = document.querySelector(".btn");
+        const list = document.querySelector(".list-data");
+
+        function addTodo(){
+            if(inputData.value == ""){
+                alert("Enter text");
+            }
+            let elem = document.createElement("p");
+            elem.innerText = inputData.value;
+
+            list.append(elem);
+            inputData.value = "";
+        }
+        btn.addEventListener("click", function(){
+            addTodo();
+        });
+
+        list.addEventListener("click", function(event){
+            let target = event.target;
+            target.remove();
+        });
+    </script>
+</body>
+</html>
